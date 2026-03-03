@@ -118,7 +118,9 @@ if exist "%ENV_SRC%" (
     echo %GREEN%[OK]%RESET% .env sao chep thanh cong
 ) else (
     echo %YELLOW%[WARN]%RESET% Khong tim thay .env tai: %ENV_SRC%
-    echo %YELLOW%[WARN]%RESET% Hay tu dat .env vao: "%APP_DIR%\app\"
+    echo %YELLOW%[WARN]%RESET% Hay tu dat .env vao: 
+    echo		tp-net-watcher\
+    echo         ^|-- app\%GREEN%.env%RESET%
 )
 
 set "RUN_SRC=%ROOT_DIR%batFile\run.bat"
