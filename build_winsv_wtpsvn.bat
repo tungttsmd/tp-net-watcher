@@ -16,6 +16,7 @@ set "RESET=%ESC%[0m"
 set "ROOT_DIR=%~dp0"
 set "MODULE_DIR=%ROOT_DIR%winsv_wtpsvn"
 set "TARGET_DIR=%MODULE_DIR%\target"
+set "LIB_TARGET_DIR=%ROOT_DIR%\libs\tungtt-lib\target"
 set "RUNTIME_DIR=%MODULE_DIR%\runtime"
 set "DIST_DIR=%MODULE_DIR%\dist"
 set "APP_NAME=winsv_wtpsvn"
@@ -148,6 +149,7 @@ echo %GREEN%[OK]%RESET% Deployed to: tp-net-watcher\
 rmdir /s /q "%DIST_DIR%"
 rmdir /s /q "%RUNTIME_DIR%"
 rmdir /s /q "%TARGET_DIR%"
+rmdir /s /q "%LIB_TARGET_DIR%"
 
 echo %GREEN%[OK]%RESET% Temp files cleaned.
 
@@ -172,6 +174,5 @@ echo %CYAN%[INFO]%RESET% File cau hinh .env se nam tai:
 echo		tp-net-watcher\
 echo         ^|-- app\%GREEN%.env%RESET%
 echo.
-
 pause
 endlocal

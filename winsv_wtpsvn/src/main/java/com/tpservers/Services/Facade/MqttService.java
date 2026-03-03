@@ -3,6 +3,7 @@ package com.tpservers.Services.Facade;
 import java.util.Set;
 import java.lang.String;
 
+import com.tpservers.Repositories.MetaRespository;
 import tungtt.Broker.Mqtt.Core.MqttCore;
 import tungtt.Broker.Mqtt.Configs.MqttInit;
 import tungtt.Broker.Mqtt.Configs.MqttOption;
@@ -32,7 +33,7 @@ public final class MqttService {
     public static void start() {
 
         Holder.CLIENT_ID = ConfigService.HOST_FROM_PREFIX() + "-" + ConfigService.HOST_ID() + "-"
-                + HardwareService.hwHwid();
+                + MetaRespository.hostHwid();
 
         MqttInit config = new MqttInit(
                 ConfigService.MQTT_BROKER_URL(),

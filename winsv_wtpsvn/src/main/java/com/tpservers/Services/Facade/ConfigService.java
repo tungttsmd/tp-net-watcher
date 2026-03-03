@@ -182,6 +182,15 @@ public final class ConfigService {
     }
 
     /* ========================= ENV MQTT ========================== */
+
+    public static String MQTT_SERVER_HOST() {
+        return Holder.MQTT_SERVER_HOST;
+    }
+
+    public static int MQTT_SERVER_PORT() {
+        return Holder.MQTT_SERVER_PORT;
+    }
+
     public static String MQTT_BROKER_URL() {
         return "tcp://" + Holder.MQTT_SERVER_HOST + ":" + Holder.MQTT_SERVER_PORT;
     }
@@ -197,7 +206,6 @@ public final class ConfigService {
     public static String CONTROL_TOPIC() {
         return Holder.CONTROL_TOPIC;
     }
-
 
     public static String RUNTIME_TOPIC() {
         return Holder.RUNTIME_TOPIC;
