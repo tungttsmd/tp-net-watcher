@@ -15,6 +15,7 @@ com\tpservers\Models\WakeOnLanSender.class
 com\tpservers\Routes\RouteDispatcher\RouteDispatcher$Holder.class
 com\tpservers\Routes\RouteRegistry\RouteRegistry.class
 com\tpservers\Services\Facade\MqttService.class
+com\tpservers\Repositories\MetaRespository$Holder.class
 com\tpservers\Routes\RouteMiddleware\RequestReader.class
 com\tpservers\Routes\RouteModule\PowerModule.class
 com\tpservers\Routes\RouteModule\RouteModule.class
@@ -24,6 +25,7 @@ com\tpservers\Services\Facade\ResponseService.class
 com\tpservers\Services\Facade\PortService.class
 com\tpservers\Services\Facade\EventService.class
 com\tpservers\Services\Facade\ConsoleService$Holder.class
+com\tpservers\Repositories\MetaRespository.class
 com\tpservers\Services\Facade\ConfigService$Holder.class
 com\tpservers\Services\Facade\HardwareService.class
 com\tpservers\Routes\RouteDispatcher\RouteDispatcher.class
