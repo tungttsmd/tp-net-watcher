@@ -114,7 +114,7 @@ set "APP_DIR=%DIST_DIR%\%APP_NAME%"
 
 set "ENV_SRC=%MODULE_DIR%\src\main\resources\.env"
 if exist "%ENV_SRC%" (
-    copy /y "%ENV_SRC%" "%APP_DIR%\.env" > nul
+    copy /y "%ENV_SRC%" "%APP_DIR%\app\.env" > nul
     echo %GREEN%[OK]%RESET% .env sao chep thanh cong
 ) else (
     echo %YELLOW%[WARN]%RESET% Khong tim thay .env tai: %ENV_SRC%
@@ -159,13 +159,16 @@ echo %GREEN%===============================================%RESET%
 echo.
 echo %CYAN%[INFO]%RESET% Output: %DEPLOY_DIR%\
 echo.
-echo %CYAN%[INFO]%RESET% Cau truc:
+echo %CYAN%[INFO]%RESET% Cau truc folder, dung run.bat de chay:
 echo         tp-net-watcher\
 echo         ^|-- app\
 echo         ^|-- runtime\
 echo         ^|-- %APP_NAME%.exe
-echo         ^|-- .env
 echo         ^`-- run.bat
+echo.
+echo %CYAN%[INFO]%RESET% File cau hinh .env se nam tai:
+echo		tp-net-watcher\
+echo         ^|-- app\%GREEN%.env%RESET%
 echo.
 
 pause
