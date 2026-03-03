@@ -8,10 +8,10 @@ com\tpservers\Services\Facade\RedisService.class
 com\tpservers\Jobs\NamedThreadFactory.class
 com\tpservers\Core\EventHandler.class
 com\tpservers\Routes\RouteAnnotation\RouteCommandTitleAnnotation.class
+com\tpservers\Models\WakeOnLanHostMap.class
 com\tpservers\Services\Service.class
 com\tpservers\Services\Facade\MqttService$Holder.class
-com\tpservers\Models\WakeOnLanSender$Holder.class
-com\tpservers\Models\WakeOnLanSender.class
+com\tpservers\Services\Facade\WakeOnLanService.class
 com\tpservers\Routes\RouteDispatcher\RouteDispatcher$Holder.class
 com\tpservers\Routes\RouteRegistry\RouteRegistry.class
 com\tpservers\Services\Facade\MqttService.class
@@ -21,6 +21,7 @@ com\tpservers\Routes\RouteModule\PowerModule.class
 com\tpservers\Routes\RouteModule\RouteModule.class
 com\tpservers\App.class
 com\tpservers\Routes\RouteAnnotation\RouteCommandAnnotation.class
+com\tpservers\Models\WakeOnLanHostMap$Holder.class
 com\tpservers\Services\Facade\ResponseService.class
 com\tpservers\Services\Facade\PortService.class
 com\tpservers\Services\Facade\EventService.class
@@ -33,6 +34,7 @@ com\tpservers\Caches\RedisServiceManager.class
 com\tpservers\Services\Facade\PoolService.class
 com\tpservers\Routes\RouteModule\LaunchModule.class
 com\tpservers\Services\Facade\ConsoleService.class
+com\tpservers\Models\WakeOnLanHostMap$Holder$1.class
 com\tpservers\Services\Facade\HardwareService$Holder.class
 com\tpservers\Services\Facade\PoolService$Holder.class
 com\tpservers\Routes\RouteDispatcher\CommandDispatcher.class
@@ -41,5 +43,4 @@ com\tpservers\Routes\RouteModule\HealthModule.class
 com\tpservers\Routes\RouteModule\ProfileModule.class
 com\tpservers\Routes\RouteBootstrap.class
 com\tpservers\Services\Facade\PortService$Holder.class
-com\tpservers\Models\WakeOnLanSender$1.class
 com\tpservers\Services\Facade\ConfigService.class
