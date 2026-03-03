@@ -3,6 +3,7 @@ package com.tpservers.Core;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import com.tpservers.Models.WakeOnLanHostMap;
 import com.tpservers.Services.Facade.ConfigService;
 import com.tpservers.Services.Facade.ConsoleService;
 import com.tpservers.Services.Facade.RedisService;
@@ -71,6 +72,14 @@ public class EventHandler {
             + ":" + hostId;
 
         push(jedis, key, store);
+
+        String nodeFrom = meta.get("node_from").getAsString();
+        String registryKey = "event:host:seen:" + nodeFrom;
+
+        if (!jedis.exists(registryKey)) {
+            WakeOnLanHostMap.registerIfAbsent(nodeFrom, WakeOnLanHostMap.extractLocalIp(nodeFrom));
+            jedis.set(registryKey, "1");
+        }
     }
 
     private static void handleSignal(

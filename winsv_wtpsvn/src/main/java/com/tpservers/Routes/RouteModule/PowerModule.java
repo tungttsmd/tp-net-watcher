@@ -4,7 +4,7 @@ import com.tpservers.Routes.RouteAnnotation.RouteCommandTitleAnnotation;
 import com.tpservers.Routes.RouteAnnotation.RouteCommandAnnotation;
 import com.tpservers.Routes.RouteDispatcher.RouteDispatcher;
 import com.tpservers.Routes.RouteDispatcher.CommandDispatcher;
-import com.tpservers.Models.WakeOnLanSender;
+import com.tpservers.Services.Facade.WakeOnLanService;
 
 import com.google.gson.JsonObject;
 
@@ -12,11 +12,11 @@ import com.google.gson.JsonObject;
 public final class PowerModule {
 
     @RouteCommandAnnotation(routeCommand = "power-on")
-    public static void powerOn(JsonObject root, String agentId) {
+    public static void powerOn(JsonObject root, String hostId) {
 
-        String ip = WakeOnLanSender.ipResolver(agentId);
+        String nodeLocalIp = WakeOnLanService.wakeOnLanePowerOnByHostId(hostId);
 
-        CommandDispatcher.send(root.get("route_host").getAsString(), "power", "power-on", "wake-on-lan-" + ip);
+        CommandDispatcher.send(root.get("route_host").getAsString(), "power", "power-on", "wake-on-lan-" + nodeLocalIp);
     }
 
     @RouteCommandAnnotation(routeCommand = "power-off")

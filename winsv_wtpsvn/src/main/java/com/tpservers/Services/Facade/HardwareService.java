@@ -90,4 +90,9 @@ public final class HardwareService {
 
         return Holder.HW_PROFILE_CONTEXT;
     }
+
+    public static String getLocalIp() {
+
+        return Holder.HW_PROFILE.localIp();
+    }
 }

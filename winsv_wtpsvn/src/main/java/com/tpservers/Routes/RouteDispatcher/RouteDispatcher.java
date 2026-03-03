@@ -83,11 +83,11 @@ public final class RouteDispatcher {
                     try {
 
                         if (routeCommandTitle.equals("power") && routeCommand.equals("power-on")) {
-                            Console.info("Hello");
+
                             routeEntry.routeHandle().invoke(null, root, req.params(":hostId"));
+
                         } else {
-                            
-                            /* Này người anh em, tôi cũng không biết sao cú pháp xài một method từ một record lại như thế này, để tôi tìm hiểu lý thuyết huhu */
+
                             routeEntry.routeHandle().invoke(null, root);
                         }
                     } catch (Exception e) {
