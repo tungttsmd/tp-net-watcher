@@ -15,7 +15,7 @@ public final class PowerModule {
     public static void powerOn(JsonObject root) {
 
         // Xử lý chuỗi host identifier: example tp-net-agent-85-12F20543
-        String[] parts = root.hostIdentifier.split("-");
+        String[] parts = root.get("hostIdentifier").getAsString().split("-");
         String hostId = parts[parts.length - 2];
 
         String nodeLocalIp = WakeOnLanService.wakeOnLanePowerOnByHostId(hostId);
