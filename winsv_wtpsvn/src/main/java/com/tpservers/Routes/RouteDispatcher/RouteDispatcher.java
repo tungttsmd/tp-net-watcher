@@ -6,7 +6,6 @@ import spark.Spark.*;
 
 import static spark.Spark.post;
 
-
 import com.tpservers.Services.Facade.ResponseService;
 import com.tpservers.Services.Facade.RedisService;
 import com.tpservers.Services.Facade.ConsoleService;
@@ -45,13 +44,13 @@ public final class RouteDispatcher {
             return;
         }
 
-        post("/api/command/:routeCommandTitle/:hostId/:routeCommand", (req, res) -> {
-            
+        post("/api/command/:routeCommandTitle/:hostIdentifier/:routeCommand", (req, res) -> {
+
             try {
                 JsonObject root = new JsonObject();
 
                 RequestMiddleware.bodyValid(root, req, res);
-                RequestMiddleware.paramValid(root, ":hostId", req, res);
+                RequestMiddleware.paramValid(root, ":hostIdentifier", req, res);
                 RequestMiddleware.paramValid(root, ":routeCommandTitle", req, res);
                 RequestMiddleware.paramValid(root, ":routeCommand", req, res);
                 RequestReader.boot(root, req);
@@ -64,11 +63,10 @@ public final class RouteDispatcher {
                 String routeCommandTitle = req.params(":routeCommandTitle");
                 String routeCommand = req.params(":routeCommand");
 
-                root.addProperty("route_host", req.params(":hostId"));
+                root.addProperty("route_host_identifier", req.params(":hostIdentifier"));
                 root.addProperty("route_title", routeCommandTitle);
                 root.addProperty("route_command", routeCommand);
 
-                
                 RouteEntry routeEntry = RouteRegistry.get(routeCommandTitle, routeCommand);
 
                 if (routeEntry == null) {
@@ -82,14 +80,11 @@ public final class RouteDispatcher {
 
                     try {
 
-                        if (routeCommandTitle.equals("power") && routeCommand.equals("power-on")) {
+                        // Gọi hàm handle (tên hàm phụ thuộc vào RouteModule nhưng được parse chung về
+                        // routeHandle(), và invoke(null) tui không biết lí do tại sao, kệ đi)
 
-                            routeEntry.routeHandle().invoke(null, root, req.params(":hostId"));
+                        routeEntry.routeHandle().invoke(null, root);
 
-                        } else {
-
-                            routeEntry.routeHandle().invoke(null, root);
-                        }
                     } catch (Exception e) {
                         Console.error(e.getMessage());
                     }

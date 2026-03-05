@@ -12,16 +12,19 @@ public final class SensorModule {
 
     @RouteCommandAnnotation(routeCommand = "raw")
     public static void sensorRaw(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "sensor", "raw", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "sensor", "raw", "");
     }
 
     @RouteCommandAnnotation(routeCommand = "temperatures")
     public static void sensorTemperature(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "sensor", "temperatures", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "sensor", "temperatures", "");
     }
 
     @RouteCommandAnnotation(routeCommand = "heartbeat")
     public static void sensorHeartbeat(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "sensor", "heartbeat", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "sensor", "heartbeat", "");
     }
 }

@@ -11,6 +11,7 @@ public class RequestReader {
         if (root.has("error")) {
             return root;
         }
+
         try {
             root = header(root, req);
             root = body(root, req);

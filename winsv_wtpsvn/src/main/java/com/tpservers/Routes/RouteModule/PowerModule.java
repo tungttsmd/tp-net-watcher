@@ -12,20 +12,29 @@ import com.google.gson.JsonObject;
 public final class PowerModule {
 
     @RouteCommandAnnotation(routeCommand = "power-on")
-    public static void powerOn(JsonObject root, String hostId) {
+    public static void powerOn(JsonObject root) {
+
+        // Xử lý chuỗi host identifier: example tp-net-agent-85-12F20543
+        String[] parts = root.hostIdentifier.split("-");
+        String hostId = parts[parts.length - 2];
 
         String nodeLocalIp = WakeOnLanService.wakeOnLanePowerOnByHostId(hostId);
 
-        CommandDispatcher.send(root.get("route_host").getAsString(), "power", "power-on", "wake-on-lan-" + nodeLocalIp);
+        String context = "wake-on-lan-" + nodeLocalIp;
+
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "power", "power-on", context);
     }
 
     @RouteCommandAnnotation(routeCommand = "power-off")
     public static void powerOff(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "power", "power-off", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "power", "power-off", "");
     }
 
     @RouteCommandAnnotation(routeCommand = "power-reset")
     public static void powerReset(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "power", "power-reset", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "power", "power-reset", "");
     }
 }

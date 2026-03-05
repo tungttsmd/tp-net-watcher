@@ -12,11 +12,13 @@ public final class LaunchModule {
 
     @RouteCommandAnnotation(routeCommand = "launch-current-version")
     public static void launchCurrentVersion(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "launch", "launch-current-version", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "launch", "launch-current-version", "");
     }
 
     @RouteCommandAnnotation(routeCommand = "launch-update")
     public static void launchUpdate(JsonObject root) {
-        CommandDispatcher.send(root.get("route_host").getAsString(), "launch", "launch-update", "");
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "launch", "launch-update", "");
     }
 }

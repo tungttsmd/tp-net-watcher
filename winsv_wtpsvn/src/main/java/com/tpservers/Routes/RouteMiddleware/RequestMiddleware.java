@@ -39,18 +39,16 @@ public class RequestMiddleware {
         if (root.has("error")) {
             return;
         }
-        // 1. Tự sửa lỗi trường hợp param không hợp lệ
+
         if (paramString.startsWith(":")) {
-            paramString = paramString.substring(1);
-        } else {
-            paramString = ":" + paramString;
+            paramString = paramString.substring(1); // remove ":" if user accidentally added
         }
 
-        // 2. Xử lý trường hợp param không hợp lệ
-        String paramValue = req.params(paramString);
+        String paramValue = req.params(paramString); // Kiểm tra param có hợp lệ hay không
+
         if (paramValue == null || paramValue.isEmpty()) {
             res.status(400);
-            root.addProperty("error", "param: [" + paramString + "] is required on path");
+            root.addProperty("error", "param: [:" + paramString + "] is required on path");
             return;
         }
     }

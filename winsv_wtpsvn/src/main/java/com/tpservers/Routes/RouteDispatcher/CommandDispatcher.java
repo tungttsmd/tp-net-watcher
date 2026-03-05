@@ -9,30 +9,59 @@ import com.tpservers.Services.Facade.MqttService;
 
 public final class CommandDispatcher {
 
-    private CommandDispatcher() {}
+    private CommandDispatcher() {
+    }
 
     public static void send(
-        String hostId,
-        String title,
-        String command,
-        String context
-    ) {
+            String hostIdentifier,
+            String title,
+            String command,
+            String context) {
 
         try {
 
+            // Lấy chuỗi target type "agent" hoặc "trigger" từ Host Identifier
+            String[] parts = hostIdentifier.split("-");
+
+            String targetType = parts[2]; // agent hoặc trigger
+            String targetId = parts[3]; // Port
+            String targetHwid = parts[4]; // chuỗi 8 số hwid
+
             CommandModuleContext dataContext = new CommandModuleContext(title, command, context);
-            EnvelopeMetaContext metaContext = new EnvelopeMetaContext(hostId, ConfigService.HOST_FROM_PREFIX() + "-" + hostId,ConfigService.HOST_VERSION(),Console.now());
-            EnvelopeSecureContext secureContext = new EnvelopeSecureContext("[coming soon]","[coming soon]");
+
+            EnvelopeMetaContext metaContext = new EnvelopeMetaContext(
+                    targetId,
+                    ConfigService.HOST_FROM_PREFIX() + "-" + targetId + "-00000000",
+                    ConfigService.HOST_VERSION(),
+                    Console.now());
+
+            EnvelopeSecureContext secureContext = new EnvelopeSecureContext("[coming soon]", "[coming soon]");
 
             CommandEnvelope enveloped = new CommandEnvelope(metaContext, secureContext, dataContext);
 
-            String topic = ConfigService.CONTROL_TOPIC().replace(":hostId", hostId);
+            String agentTopic = ConfigService.CLIENT_CONTROL_TOPIC()
+                    .replace(":hostIdentifier", hostIdentifier);
+
+            String triggerTopic = ConfigService.NODE_CONTROL_TOPIC()
+                    .replace(":hostIdentifier", hostIdentifier);
+
             String payload = JsonConsole.toJson(enveloped.build());
 
-            MqttService.publish(topic, payload, 1);
+            switch (targetType) {
+                case "agent":
+                    MqttService.publish(agentTopic, payload, 1);
+                    break;
+                case "trigger":
+                    MqttService.publish(triggerTopic, payload, 1);
+                    break;
+                default:
+                    Console.error("Can not resolve target type (target type valid: agent/trigger): " + targetType);
+            }
 
         } catch (Exception e) {
+
             Console.error("Command dispatch failed: " + e.getMessage());
+
         }
     }
 }
