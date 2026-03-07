@@ -60,10 +60,23 @@ public final class MqttService {
 
         Console.line();
 
-        try {
-            Holder.mqtt = MqttCore.start(config, options);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        // Ở lần boot đầu tiên của MQTT Paho, Paho không hỗ trợ retry, bản thân phải tự làm
+
+        Console.line();
+        Console.info("This host server service removed reboot after retries methods of connecting to MQTT broker (MqttService) different from agent's and trigger's MqttService"); 
+        Console.info("Host server service do not reboot automatically");
+        Console.line();
+
+        // Ở host service này đã lược bỏ chức năng reboot sau n lần retry (khác với MqttService trigger/agent)
+
+        while (true) {
+            try {
+                Holder.mqtt = MqttCore.start(config, options);
+                break;
+            } catch (Exception e) {
+                Console.error("MQTT booted — FAILED: " + e.getMessage());
+                try { Thread.sleep(5000); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
+            }
         }
 
         for (String subTopic : Holder.SUB_TOPICS) {

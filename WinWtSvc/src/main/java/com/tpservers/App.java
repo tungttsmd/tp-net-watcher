@@ -40,7 +40,7 @@ public class App {
         // B. Đăng ký route
         RouteBootstrap.init();
 
-        // C. Mở cổng
+        // C. Mở cổng local
         RouteDispatcher.boot();
 
         // D. Bật dịch vụ Event Processor

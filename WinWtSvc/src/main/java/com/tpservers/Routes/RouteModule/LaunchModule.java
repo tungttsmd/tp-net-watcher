@@ -10,6 +10,12 @@ import com.google.gson.JsonObject;
 @RouteCommandTitleAnnotation(routeCommandTitle = "launch")
 public final class LaunchModule {
 
+    @RouteCommandAnnotation(routeCommand = "launch-device-type")
+    public static void launchDeviceType(JsonObject root) {
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "launch", "launch-device-type", "");
+    }
+
     @RouteCommandAnnotation(routeCommand = "launch-current-version")
     public static void launchCurrentVersion(JsonObject root) {
         CommandDispatcher.send(root.get("route_host_identifier")
@@ -20,5 +26,11 @@ public final class LaunchModule {
     public static void launchUpdate(JsonObject root) {
         CommandDispatcher.send(root.get("route_host_identifier")
                 .getAsString(), "launch", "launch-update", "");
+    }
+
+    @RouteCommandAnnotation(routeCommand = "launch-set-wallpaper")
+    public static void launchSetWallpaper(JsonObject root) {
+        CommandDispatcher.send(root.get("route_host_identifier")
+                .getAsString(), "launch", "launch-set-wallpaper", "");
     }
 }
